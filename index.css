@@ -6,27 +6,250 @@
   display: grid;
   grid-template-columns: 1fr 3fr;
   grid-template-rows: 120px 1fr;
+  column-gap: 50px;
 }
 
 .nav {
   grid-area: 1 / 1 / 2 / 3;
-  background-color: aqua;
+  background-color: rgb(240, 240, 240);
   padding: 16px;
   display: flex;
   justify-content: space-between;
+  padding: 25px;
 }
-
-
 
 .sidebar {
+  padding: 16px;
   grid-area: 2 / 1 / 3 / 2;
-  background-color: rgb(0, 26, 255);
+
+  display: flex;
+  flex-direction: column;
+
+
+  .add-book {
+    height: 350px;
+    align-content: center;
+    text-align: center;
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 600;
+      color: gold;
+      margin-bottom: 30px;
+    }
+
+    button.show {
+      padding: 0.5em 3em;
+      background-color: #008000;
+      color: white;
+      border-radius: 15px;
+      font-size: 1.8rem;
+      font-weight: 600;
+    }
+
+    /* ----------------Dialog Style start--------------------------- */
+
+    dialog:open {
+      opacity: 1;
+      transform: scaleY(1);
+    }
+
+    dialog {
+      opacity: 0;
+      transform: scaleY(0);
+      transition:
+        opacity 0.7s ease-out,
+        transform 0.7s ease-out,
+        overlay 0.7s ease-out allow-discrete,
+        display 0.7s ease-out allow-discrete;
+    }
+
+    @starting-style {
+      dialog:open {
+        opacity: 0;
+        transform: scaleY(0);
+      }
+    }
+
+    dialog::backdrop {
+      background-image: linear-gradient(45deg,
+          magenta,
+          rebeccapurple,
+          dodgerblue,
+          green);
+      opacity: 0.75;
+      background-color: rgb(0 0 0 / 0%);
+      transition:
+        display 0.7s allow-discrete,
+        overlay 0.7s allow-discrete,
+        background-color 0.7s;
+    }
+
+    dialog:open::backdrop {
+      background-color: rgb(0 0 0 / 25%);
+    }
+
+
+    @starting-style {
+      dialog:open::backdrop {
+        background-color: rgb(0 0 0 / 0%);
+      }
+    }
+
+
+    /* ---------------------Dialog Style end--------------------------- */
+
+    /* ------------------Form in Dialog Style start---------------------- */
+
+    dialog form {
+      padding: 25px;
+      max-width: 750px;
+
+      fieldset {
+        padding: 20px 50px;
+        border: 1px solid gray;
+        text-align: start;
+      }
+    }
+
+    dialog form .dialog-picture {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      gap: 30px;
+
+      picture label {
+        display: inline-block;
+
+        margin-bottom: 15px;
+      }
+
+      picture input {
+        margin-left: 50px;
+      }
+
+    }
+
+    dialog form .dialog-card-content {
+      margin-top: 40px;
+      display: flex;
+      gap: 30px;
+      flex-wrap: wrap;
+
+      .title-price-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+
+        p label {
+          margin-right: 10px;
+          font-weight: 600;
+        }
+
+        p input {
+           padding-left: 7px;
+          border-bottom: 1px solid gray;
+        }
+      }
+
+      #textarea {
+        padding: 5px;
+        flex-grow: 1;
+
+        legend {
+           font-weight: 600;
+        }
+        
+        textarea {
+          height: 100px;
+          width: 100%;
+          padding: 15px 5 5 15px;
+        }
+      }
+    }
+
+    dialog form .dialog-card-info {
+
+      button {
+        padding: 0.5em 3em;
+        background-color: #008000;
+        color: white;
+        border-radius: 15px;
+        font-size: 1.2rem;
+        font-weight: 600;
+      }
+
+      #cancel {
+        background-color: #c52d07;
+        margin: 30px;
+      }
+    }
+
+
+
+
+    /* ------------------Form in Dialog Style end---------------------- */
+
+
+  }
+
+  .my-books {
+    border-right: 1px solid gray;
+    padding-right: 20px;
+
+    h1 {
+      color: black;
+      font-size: 2rem;
+      font-weight: bold;
+      border-bottom: 1px solid gray;
+      padding: 1rem;
+      margin-bottom: 25px;
+    }
+
+    .card {
+      color: rgb(55, 55, 55);
+      margin-bottom: 20px;
+      display: flex;
+      gap: 25px;
+      font-size: 1rem;
+      background-color: rgb(243, 243, 243);
+      border-radius: 15px;
+      padding-right: 16px;
+
+      picture {
+        width: 260px;
+
+        img {
+          border-radius: 15px 0 0 15px;
+          min-height: 100%;
+        }
+      }
+
+      h1 {
+        font-size: 1.2rem;
+        font-weight: bold;
+        margin: 10px 0;
+        border-bottom: none;
+        padding: 0;
+
+      }
+
+      p {
+        font-size: 0.9rem;
+        margin-bottom: 16px;
+      }
+
+      &:hover {
+        outline: 1px solid rgb(12, 192, 12);
+      }
+    }
+  }
 }
+
+
 
 .menu {
   grid-area: 2 / 2 / 3 / 3;
-
-
 }
 
 .cards {
@@ -61,12 +284,14 @@
     p {
       font-size: 1.2rem;
       margin-bottom: 1em;
+      color: rgb(55, 55, 55);
     }
 
     .card-info {
       font-size: 1.2rem;
       margin: 1em 0;
       display: flex;
+
       button {
         padding: 0.6em 0.7em;
         background-color: green;
@@ -81,7 +306,8 @@
       }
 
       .card-read {
-        padding: 0.6em 0.7em;;
+        padding: 0.6em 0.7em;
+        ;
         background-color: #eef;
         border-radius: 15px;
         width: 125px;
@@ -92,12 +318,11 @@
 
         label {
           margin-right: 15px;
-          span {
 
-          }
+          span {}
         }
 
-        input[type = "checkbox"] {
+        input[type="checkbox"] {
           -webkit-appearance: none;
           appearance: none;
           width: 54px;

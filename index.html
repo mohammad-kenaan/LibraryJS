@@ -24,7 +24,94 @@
         </ul>
       </menu>
     </div>
-    <div class="grid-item sidebar"></div>
+    <div class="grid-item sidebar">
+      <div class="add-book">
+        <h1>Add your Book</h1>
+        <button class="show">Add Now</button>
+
+        <dialog id="dialog" autofocus>
+          <form>
+            <fieldset class="dialog-picture">
+              <legend>Provide 2 picture for each book</legend>
+              <picture>
+                <label for="imgInput-1">First image width should be: 342px</label>
+                <input type="file" accept="image/*" name="imgInput-1" id="imgInput-1">
+              </picture>
+
+              <picture>
+                <label for="imgInput-2">Second image width should be: 1000px</label>
+                <input type="file" accept="image/*" name="imgInput-2" id="imgInput-2">
+              </picture>
+
+            </fieldset>
+
+            <fieldset class="dialog-card-content">
+              <legend>Book Details</legend>
+              <div class="title-price-container">
+
+                <p>
+                  <label for="book-title">Title:</label>
+                  <input type="text" name="book-title" id="book-title">
+                </p>
+
+                <p>
+                  <label for="book-price">Price:</label>
+                  <input type="tel" name="book-price" id="book-price">
+                </p>
+              </div>
+
+                <fieldset id="textarea">
+                  <legend>Description</legend>
+                  <textarea name="book-description" id="book-description"></textarea>
+                </fieldset>
+
+            </fieldset>
+
+            <div class="dialog-card-info">
+              <button id="cancel" formmethod="dialog">Cancel</button>
+              <button id="confirmBtn" value="default">Confirm</button>
+            </div>
+          </form>
+        </dialog>
+
+
+
+      </div>
+
+      <div class="my-books">
+        <h1 class="">My Books List</h1>
+        <div class="card">
+          <picture>
+            <img src="./assets/images/pic1-342.jpg" alt="">
+          </picture>
+
+          <div class="card-content">
+            <h1>Kindness Makes Me Stronger</h1>
+            <p>Children’s Book about Magic of Kindness, Empathy and Respect Social Emotional Intelligence, and more</p>
+          </div>
+        </div>
+        <div class="card">
+          <picture>
+            <img src="./assets/images/pic1-342.jpg" alt="">
+          </picture>
+
+          <div class="card-content">
+            <h1>Kindness Makes Me Stronger</h1>
+            <p>Children’s Book about Magic of Kindness, Empathy and Respect Social Emotional Intelligence, and more</p>
+          </div>
+        </div>
+        <div class="card">
+          <picture>
+            <img src="./assets/images/pic1-342.jpg" alt="">
+          </picture>
+
+          <div class="card-content">
+            <h1>Kindness Makes Me Stronger</h1>
+            <p>Children’s Book about Magic of Kindness, Empathy and Respect Social Emotional Intelligence, and more</p>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="grid-item menu">
       <div class="cards">
         <div class="card">
@@ -33,12 +120,12 @@
           </picture>
           <div class="card-content">
             <h1>Kindness Makes Me Stronger</h1>
-            <p>Children’s Book about Magic of Kindness, Empathy and Respect 
+            <p>Children’s Book about Magic of Kindness, Empathy and Respect
               Social Emotional Intelligence, and more</p>
             <div class="card-info">
               <button>Get Only By: <span class="price">$15<sup>99</sup></span></button>
               <div class="card-read">
-                <label for="read">Read</label>
+                <label for="">Read</label>
                 <input type="checkbox" name="read" id="read">
               </div>
             </div>
@@ -52,11 +139,11 @@
           <div class="card-content">
             <h1>I Am Stronger Than Anger</h1>
             <p>Picture Book About Anger Management And Dealing With Kids Emotions
-               And Feelings  </p>
+              And Feelings </p>
             <div class="card-info">
               <button>Get Only By: <span class="price">$15<sup>99</sup></span></button>
               <div class="card-read">
-                <label for="read">Read</label>
+                <label for="">Read</label>
                 <input type="checkbox" name="read" id="read">
               </div>
             </div>
@@ -68,12 +155,12 @@
           </picture>
           <div class="card-content">
             <h1>My Way to Keep Anger Away:</h1>
-            <p>Children's Book about Anger Management and Kids Big Emotions 
-               Intelligence, more and more</p>
+            <p>Children's Book about Anger Management and Kids Big Emotions
+              Intelligence, more and more</p>
             <div class="card-info">
               <button>Get Only By: <span class="price">$15<sup>99</sup></span></button>
               <div class="card-read">
-                <label for="read">Read</label>
+                <label for="">Read</label>
                 <input type="checkbox" name="read" id="read">
               </div>
             </div>
@@ -91,7 +178,7 @@
             <div class="card-info">
               <button>Get Only By: <span class="price">$15<sup>99</sup></span></button>
               <div class="card-read">
-                <label for="read">Read</label>
+                <label for="">Read</label>
                 <input type="checkbox" name="read" id="read">
               </div>
             </div>
@@ -104,12 +191,12 @@
           <div class="card-content">
             <h1>The Kids' Book of Friends</h1>
             <p>How to Make Friends and Be a Friend Book about Friendship,
-               Inclusion and Social Skills
+              Inclusion and Social Skills
               more and more</p>
             <div class="card-info">
               <button>Get Only By: <span class="price">$15<sup>99</sup></span></button>
               <div class="card-read">
-                <label for="read">Read</label>
+                <label for="">Read</label>
                 <input type="checkbox" name="read" id="read">
               </div>
             </div>
@@ -125,7 +212,7 @@
             <div class="card-info">
               <button>Get Only By: <span class="price">$15<sup>99</sup></span></button>
               <div class="card-read">
-                <label for="read">Read</label>
+                <label for="">Read</label>
                 <input type="checkbox" name="read" id="read">
               </div>
             </div>
@@ -137,13 +224,13 @@
           </picture>
           <div class="card-content">
             <h1>La persévérance me rend plus fort</h1>
-            <p>Children’s Book about Magic of Kindness, Empathy and Respect, 
+            <p>Children’s Book about Magic of Kindness, Empathy and Respect,
               more and more
             </p>
             <div class="card-info">
               <button>Get Only By: <span class="price">$15<sup>99</sup></span></button>
               <div class="card-read">
-                <label for="read">Read</label>
+                <label for="">Read</label>
                 <input type="checkbox" name="read" id="read">
               </div>
             </div>
@@ -159,7 +246,7 @@
             <div class="card-info">
               <button>Get Only By: <span class="price">$15<sup>99</sup></span></button>
               <div class="card-read">
-                <label for="read">Read</label>
+                <label for="">Read</label>
                 <input type="checkbox" name="read" id="read">
               </div>
             </div>
@@ -176,7 +263,7 @@
             <div class="card-info">
               <button>Get Only By: <span class="price">$15<sup>99</sup></span></button>
               <div class="card-read">
-                <label for="read">Read</label>
+                <label for="">Read</label>
                 <input type="checkbox" name="read" id="read">
               </div>
             </div>
