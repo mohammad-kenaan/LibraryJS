@@ -29,8 +29,10 @@
         <h1>Add your Book</h1>
         <button class="show">Add Now</button>
 
-        <dialog id="dialog" autofocus>
-          <form>
+        <dialog id="dialog" >
+         
+          <form id="add-new-book-Form" autofocus>
+            
             <fieldset class="dialog-picture">
               <legend>Provide 2 picture for each book</legend>
               <picture>
@@ -42,39 +44,38 @@
                 <label for="imgInput-2">Second image width should be: 1000px</label>
                 <input type="file" accept="image/*" name="imgInput-2" id="imgInput-2">
               </picture>
-
             </fieldset>
+
 
             <fieldset class="dialog-card-content">
               <legend>Book Details</legend>
-              <div class="title-price-container">
+              <div class="author-pages-container">
 
                 <p>
-                  <label for="book-title">Title:</label>
-                  <input type="text" name="book-title" id="book-title">
-                </p>
+                  <label for="book-author">Author of the book:</label>  </p>
+                  <p> <input type="text" name="book-author" id="book-author">  </p>
+               
 
                 <p>
-                  <label for="book-price">Price:</label>
-                  <input type="tel" name="book-price" id="book-price">
-                </p>
+                  <label for="book-num-of-pages">Number Of Pages</label>  </p>
+                <p>  <input type="tel" name="book-num-of-pages" id="book-num-of-pages"></p>
+              
               </div>
 
                 <fieldset id="textarea">
-                  <legend>Description</legend>
-                  <textarea name="book-description" id="book-description"></textarea>
+                  <legend>Title</legend>
+                  <textarea name="book-title" id="book-title"></textarea>
                 </fieldset>
 
             </fieldset>
 
+            
             <div class="dialog-card-info">
               <button id="cancel" formmethod="dialog">Cancel</button>
-              <button id="confirmBtn" value="default">Confirm</button>
+              <button formmethod="dialog" id="confirmBtn" type="button">Confirm</button>
             </div>
           </form>
         </dialog>
-
-
 
       </div>
 
@@ -113,20 +114,20 @@
       </div>
     </div>
     <div class="grid-item menu">
-      <div class="cards">
+      <div class="cards" id="cards-container">
         <div class="card">
           <picture>
             <img src="./assets/images/pic1-342.jpg" alt="">
           </picture>
           <div class="card-content">
             <h1>Kindness Makes Me Stronger</h1>
-            <p>Children’s Book about Magic of Kindness, Empathy and Respect
-              Social Emotional Intelligence, and more</p>
+            <p>Author: <cite>Mohamad Kenaan</cite></p>
+            <p>Number Of Page: : <span>253</span></p>
             <div class="card-info">
               <button>Get Only By: <span class="price">$15<sup>99</sup></span></button>
               <div class="card-read">
-                <label for="">Read</label>
-                <input type="checkbox" name="read" id="read">
+                <label for="card-1">Read</label>
+                <input type="checkbox" name="read" class="read" id="card-1">
               </div>
             </div>
 
@@ -143,8 +144,8 @@
             <div class="card-info">
               <button>Get Only By: <span class="price">$15<sup>99</sup></span></button>
               <div class="card-read">
-                <label for="">Read</label>
-                <input type="checkbox" name="read" id="read">
+                <label for="card-2">Read</label>
+                <input type="checkbox" name="read" class="read" id="card-2">
               </div>
             </div>
           </div>
@@ -160,8 +161,8 @@
             <div class="card-info">
               <button>Get Only By: <span class="price">$15<sup>99</sup></span></button>
               <div class="card-read">
-                <label for="">Read</label>
-                <input type="checkbox" name="read" id="read">
+                <label for="card-3">Read</label>
+                <input type="checkbox" name="read" class="read" id="card-3">
               </div>
             </div>
           </div>
@@ -178,8 +179,8 @@
             <div class="card-info">
               <button>Get Only By: <span class="price">$15<sup>99</sup></span></button>
               <div class="card-read">
-                <label for="">Read</label>
-                <input type="checkbox" name="read" id="read">
+                <label for="card-4">Read</label>
+                <input type="checkbox" name="read" class="read" id="card-4">
               </div>
             </div>
           </div>
@@ -196,8 +197,8 @@
             <div class="card-info">
               <button>Get Only By: <span class="price">$15<sup>99</sup></span></button>
               <div class="card-read">
-                <label for="">Read</label>
-                <input type="checkbox" name="read" id="read">
+                <label for="card-5">Read</label>
+                <input type="checkbox" name="read" class="read" id="card-5">
               </div>
             </div>
           </div>
@@ -212,8 +213,8 @@
             <div class="card-info">
               <button>Get Only By: <span class="price">$15<sup>99</sup></span></button>
               <div class="card-read">
-                <label for="">Read</label>
-                <input type="checkbox" name="read" id="read">
+                <label for="card-6">Read</label>
+                <input type="checkbox" name="read" class="read" id="card-6">
               </div>
             </div>
           </div>
@@ -230,8 +231,8 @@
             <div class="card-info">
               <button>Get Only By: <span class="price">$15<sup>99</sup></span></button>
               <div class="card-read">
-                <label for="">Read</label>
-                <input type="checkbox" name="read" id="read">
+                <label for="card-7">Read</label>
+                <input type="checkbox" name="read" class="read" id="card-7">
               </div>
             </div>
           </div>
@@ -246,8 +247,8 @@
             <div class="card-info">
               <button>Get Only By: <span class="price">$15<sup>99</sup></span></button>
               <div class="card-read">
-                <label for="">Read</label>
-                <input type="checkbox" name="read" id="read">
+                <label for="card-8">Read</label>
+                <input type="checkbox" name="read" class="read" id="card-8">
               </div>
             </div>
           </div>
@@ -263,8 +264,8 @@
             <div class="card-info">
               <button>Get Only By: <span class="price">$15<sup>99</sup></span></button>
               <div class="card-read">
-                <label for="">Read</label>
-                <input type="checkbox" name="read" id="read">
+                <label for="card-9">Read</label>
+                <input type="checkbox" name="read" class="read" id="card-9">
               </div>
             </div>
           </div>
