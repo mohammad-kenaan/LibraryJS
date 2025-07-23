@@ -137,14 +137,14 @@
       flex-wrap: wrap;
 
       .author-pages-container {
-  
+
         p label {
           margin-right: 80px;
           font-weight: 600;
         }
 
         p input {
-           padding-left: 7px;
+          padding-left: 7px;
           border-bottom: 1px solid gray;
           margin-bottom: 2em;
         }
@@ -155,9 +155,9 @@
         flex-grow: 1;
 
         legend {
-           font-weight: 600;
+          font-weight: 600;
         }
-        
+
         textarea {
           height: 120px;
           width: 100%;
@@ -182,9 +182,6 @@
         margin: 30px;
       }
     }
-
-
-
 
     /* ------------------Form in Dialog Style end---------------------- */
 
@@ -245,7 +242,6 @@
 }
 
 
-
 .menu {
   grid-area: 2 / 2 / 3 / 3;
 }
@@ -289,24 +285,25 @@
       font-size: 1.2rem;
       margin: 1em 0;
       display: flex;
+      justify-content: center;
 
       button {
-        padding: 0.6em 0.7em;
-        background-color: green;
+        padding: 0.6em 1.7em;
+        background-color: red;
         border-radius: 15px;
         color: white;
         margin-right: 15px;
 
         &:hover {
-          background-color: green;
+          box-shadow: -3px -3px 2px gray;
           color: white;
         }
       }
 
       .card-read {
         padding: 0.6em 0.7em;
-        ;
-        background-color: #eef;
+        background-color: #008000;
+        color: white;
         border-radius: 15px;
         width: 125px;
         display: flex;
@@ -316,8 +313,6 @@
 
         label {
           margin-right: 15px;
-
-          span {}
         }
 
         input[type="checkbox"] {

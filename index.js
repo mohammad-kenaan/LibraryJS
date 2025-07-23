@@ -1,47 +1,50 @@
 
-
-
-let myLibrary = [];
-let idList = [];
-
-
-function Book(author, title, numOfPages, read, id) {
-  this.author = author;
-  this.title = title;
-  this.numOfPages = numOfPages;
-  this.read = read;
-  this.id = id;
-}
-
-function addBookToLibrary(author, title, numOfPages, read) {
-  let id = window.crypto.randomUUID();
-  idList.push(id);
-  let newBook = new Book(author, title, numOfPages, read, id);
-  myLibrary.push(newBook);
-}
-
-addBookToLibrary("Moe", "JS-Odin", 245, true);
-addBookToLibrary("kho", "Intro to the Accounting", 565, true);
-addBookToLibrary("Oma", "It-System Foundation", 135, false);
-
-
-console.log(myLibrary[0]);
-console.log(myLibrary[1]);
-console.log(myLibrary[2]);
-
-function deleteBook(myLibrary) {
-
-}
-
-
-//--------------------------------------------------
-
 const dialogElem = document.getElementById("dialog");
 const showDialog = document.querySelector(".show");
 const formSubmit = document.querySelector("#confirmBtn");
 const cancelProcess = document.querySelector("#cancel");
 const cards = document.getElementById("cards-container");
 const form = document.getElementById('add-new-book-Form');
+
+let myLibrary = [];
+let idList = [];
+
+
+function Book(author, title, numOfPages, id, smallImgURL, bigImgURL) {
+  this.author = author;
+  this.title = title;
+  this.numOfPages = numOfPages;
+  // this.read = read;
+  this.id = id;
+  this.smallImgURL = smallImgURL;
+  this.bigImgURL = bigImgURL;
+}
+
+function addBookToLibrary(author, title, numOfPages, smallImgURL, bigImgURL) {
+  let id = window.crypto.randomUUID();
+  let newBook = new Book(author, title, numOfPages, id, smallImgURL, bigImgURL);
+  myLibrary.push(newBook);
+}
+
+addBookToLibrary("Mohamad Kenaan", "JS-Odin", 245, "./assets/images/pic1-342.jpg", "./assets/images/pic1-1000.jpg");
+addBookToLibrary("Eyad Al-Khalidi", "Css-Odin", 140, "./assets/images/pic2-342.jpg", "./assets/images/pic2-1000.jpg");
+addBookToLibrary("Khaled Kenaan", "Mobile Application", 80, "./assets/images/pic3-342.jpg", "./assets/images/pic3-1000.jpg");
+addBookToLibrary("Omar Kenaan", "Information Technology", 180, "./assets/images/pic4-342.jpg", "./assets/images/pic4-1000.jpg");
+addBookToLibrary("Mohamad Kenaan", "Web Development", 730, "./assets/images/pic5-342.jpg", "./assets/images/pic5-1000.jpg");
+addBookToLibrary("Mohamad Kenaan", "Intro to Arabic", 1730, "./assets/images/pic6-342.jpg", "./assets/images/pic6-1000.jpg");
+addBookToLibrary("Eyad Al-Khalidi", "Master Of Programming", 8730, "./assets/images/pic1-342.jpg", "./assets/images/pic1-1000.jpg");
+
+
+function deleteBook(myLibrary) {
+
+}
+
+//------------Books display---------------------
+
+displayBooksAsCards(myLibrary)
+//--------------------------------------------------
+
+
 
 
 showDialog.addEventListener("click", () => {
@@ -52,77 +55,77 @@ showDialog.addEventListener("click", () => {
 formSubmit.addEventListener("click", (e) => {
   e.preventDefault();
 
-
   const smallImg = document.getElementById('imgInput-1').files[0];
   const bigImg = document.getElementById('imgInput-2').files[0];
   const smallImgURL = URL.createObjectURL(smallImg);
   const bigImgURL = URL.createObjectURL(bigImg);
-
+  const author = document.getElementById('book-author').value;
   const title = document.getElementById('book-title').value;
-  const paragraph = document.getElementById('book-description').value;
-  const price = document.getElementById('book-price').value;
+  const numOfPages = document.getElementById('book-num-of-pages').value;
 
-  console.log(smallImg);
-  console.log(bigImg);
-  console.log(title);
-  console.log(paragraph);
-  console.log(price);
-
+  // Create your Book obj
+  addBookToLibrary(author, title, numOfPages, smallImgURL, bigImgURL);
+  cards.textContent = "";
+  displayBooksAsCards(myLibrary)
   dialogElem.close();
-
-  const card = document.createElement("div");
-  card.classList.add("card");
-  cards.prepend(card);
-
-  const picture = document.createElement("picture");
-  const cardContent = document.createElement("div");
-  cardContent.classList.add("card-content");
-  card.prepend(picture, cardContent);
-
-  const img = document.createElement("img");
-  img.src = smallImgURL;
-  picture.prepend(img);
-
-  const h1 = document.createElement("h1");
-  h1.textContent = title;
-
-  const p = document.createElement("p");
-  p.textContent = paragraph;
-
-  const cardInfo = document.createElement("div");
-  cardInfo.classList.add("card-info");
-  cardContent.prepend(h1, p, cardInfo);
-
-  const btn = document.createElement("button");
-  btn.textContent = "Get Only By: ";
-
-  const span = document.createElement("span");
-  span.textContent = "$" + price ;
-  btn.append(span);
-
-  const cardRead = document.createElement("div");
-  cardRead.classList.add("card-read");
-
-  cardInfo.prepend(btn, cardRead);
-
-  const label = document.createElement("label");
-  label.for = "card-1";        // Add counter
-  label.textContent = "Read";
-
-  const inp = document.createElement("input");
-  inp.type = "checkbox";
-  inp.name = "read";
-  inp.classList.add("read");
-  inp.id = "card-1";          // Add counter
-
-  cardRead.prepend(label, inp);
-
-
-
-
 })
 
+function displayBooksAsCards(arrOfBooks) {
+  arrOfBooks.forEach(item => {
+
+    console.log(item);
+    console.log("-------------------");
+    const card = document.createElement("div");
+    card.classList.add("card");
+    cards.prepend(card);
+
+    const picture = document.createElement("picture");
+    const cardContent = document.createElement("div");
+    cardContent.classList.add("card-content");
+    card.prepend(picture, cardContent);
+
+    const img = document.createElement("img");
+    img.src = item.smallImgURL;
+    picture.prepend(img);
+
+    const h1 = document.createElement("h1");
+    h1.textContent = item.title;
+
+    const p1 = document.createElement("p");
+    p1.textContent = "Author: " + item.author;
+
+    const p2 = document.createElement("p");
+    p2.textContent = "Number of Pages: " + item.numOfPages;
+
+    const cardInfo = document.createElement("div");
+    cardInfo.classList.add("card-info");
+    cardContent.prepend(h1, p1, p2, cardInfo);
+
+    const btn = document.createElement("button");
+    btn.textContent = "Delete";
+
+    // Replace it with Delete
+
+    const cardRead = document.createElement("div");
+    cardRead.classList.add("card-read");
+
+    cardInfo.prepend(btn, cardRead);
+
+    const label = document.createElement("label");
+    label.for = "card-1";        // Add counter
+    label.textContent = "Read";
+
+    const inp = document.createElement("input");
+    inp.type = "checkbox";
+    inp.name = "read";
+    inp.classList.add("read");
+    inp.id = "card-1";          // Add counter
+
+    cardRead.prepend(label, inp);
+  });
+}
 
 cancelProcess.addEventListener("click", () => {
   dialogElem.close();
 });
+
