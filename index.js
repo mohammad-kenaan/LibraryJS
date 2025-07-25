@@ -73,8 +73,6 @@ formSubmit.addEventListener("click", (e) => {
 function displayBooksAsCards(arrOfBooks) {
   arrOfBooks.forEach(item => {
 
-    console.log(item);
-    console.log("-------------------");
     const card = document.createElement("div");
     card.classList.add("card");
     cards.prepend(card);
@@ -103,8 +101,8 @@ function displayBooksAsCards(arrOfBooks) {
 
     const btn = document.createElement("button");
     btn.textContent = "Delete";
+    btn.dataset.bookId = item.id;
 
-    // Replace it with Delete
 
     const cardRead = document.createElement("div");
     cardRead.classList.add("card-read");
@@ -112,20 +110,66 @@ function displayBooksAsCards(arrOfBooks) {
     cardInfo.prepend(btn, cardRead);
 
     const label = document.createElement("label");
-    label.for = "card-1";        // Add counter
+    label.htmlFor = item.id;
     label.textContent = "Read";
 
     const inp = document.createElement("input");
     inp.type = "checkbox";
-    inp.name = "read";
+    inp.name = "is-read";
     inp.classList.add("read");
-    inp.id = "card-1";          // Add counter
+    inp.id = item.id;
 
     cardRead.prepend(label, inp);
+    card.dataset.bookId = item.id;
   });
 }
 
 cancelProcess.addEventListener("click", () => {
   dialogElem.close();
 });
+
+
+cards.addEventListener("click", (e) => {
+
+  if (e.target.nodeName === "BUTTON" && e.target.textContent === "Delete") {
+    const cardId = e.target.dataset.bookId;
+    // Delete card  
+    const cardIndex = getElementIndex(myLibrary, cardId);
+    console.log(cardIndex);
+    deleteCard(myLibrary, cardIndex)
+    // Read Card
+  } else if (e.target.nodeName === "INPUT") {
+    
+    const checkbox = e.target;
+    console.log(checkbox.checked);
+    console.log(checkbox);
+    const cardIndex = getElementIndex(myLibrary, checkbox.id);
+    // isCardRead(checkbox);
+  }
+})
+
+function getElementIndex(myLibrary, cardId) {
+  let cardIndex;
+  myLibrary.forEach((item, index) => {
+    if (item.id === cardId) {
+      cardIndex = index;
+    }
+  });
+
+  return cardIndex;
+}
+
+function deleteCard(myLibrary, cardIndex) {
+  if (cardIndex === 0) {
+    myLibrary.splice(cardIndex, 1);
+    cards.textContent = "";
+    displayBooksAsCards(myLibrary)
+  } else {
+    if (cardIndex > -1) {
+      myLibrary.splice(cardIndex, cardIndex);
+      cards.textContent = "";
+      displayBooksAsCards(myLibrary)
+    }
+  }
+}
 
