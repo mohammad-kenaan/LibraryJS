@@ -4,12 +4,15 @@ const showDialog = document.querySelector(".show");
 const formSubmit = document.querySelector("#confirmBtn");
 const cancelProcess = document.querySelector("#cancel");
 const cards = document.getElementById("cards-container");
+const favoriteCards = document.getElementById("favorite-cards");
 const form = document.getElementById('add-new-book-Form');
 
 let myLibrary = [];
-let idList = [];
+let myBooks = [];
 
+console.log(cards);
 
+console.log(favoriteCards);
 function Book(author, title, numOfPages, id, smallImgURL, bigImgURL) {
   this.author = author;
   this.title = title;
@@ -139,13 +142,14 @@ cards.addEventListener("click", (e) => {
     deleteCard(myLibrary, cardIndex)
     // Read Card
   } else if (e.target.nodeName === "INPUT") {
-    
     const checkbox = e.target;
-    console.log(checkbox.checked);
-    console.log(checkbox);
-    const cardIndex = getElementIndex(myLibrary, checkbox.id);
-    // isCardRead(checkbox);
+    if (isCardRead(checkbox)) {
+      const cardIndex = getElementIndex(myLibrary, checkbox.id);
+      addCardToMyBooks(myLibrary, cardIndex);
+      displayMyFavoriteCards();
+    }
   }
+
 })
 
 function getElementIndex(myLibrary, cardId) {
@@ -171,5 +175,49 @@ function deleteCard(myLibrary, cardIndex) {
       displayBooksAsCards(myLibrary)
     }
   }
+}
+
+function isCardRead(checkbox) {
+  return checkbox.checked;
+}
+
+function addCardToMyBooks(myLibrary, cardIndex) {
+  myBooks.push(myLibrary[cardIndex])
+
+}
+
+function displayMyFavoriteCards() {
+  favoriteCards.textContent = "";
+  console.log(myBooks);
+  console.log(myLibrary);
+  myBooks.forEach(item => {
+
+    const card = document.createElement("div");
+    card.classList.add("card");
+    favoriteCards.prepend(card);
+
+    const picture = document.createElement("picture");
+    card.append(picture);
+
+    const img = document.createElement("img");
+    img.src = item.smallImgURL;
+    picture.append(img);
+
+    const cardContent = document.createElement("div");
+    cardContent.classList.add("card-content");
+    card.append(cardContent);
+
+    const h1 = document.createElement("h1");
+    h1.textContent = item.title;
+
+    const p1 = document.createElement("p");
+    p1.textContent = "Author: " + item.author;
+
+    const p2 = document.createElement("p");
+    p2.textContent = "Number of Pages: " + item.numOfPages;
+    cardContent.append(h1, p1, p2);
+
+
+  });
 }
 
