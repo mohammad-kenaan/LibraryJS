@@ -47,7 +47,7 @@
       font-weight: 600;
     }
 
-    /* ----------------Dialog Style start--------------------------- */
+    /* ----------------Dialog Style start-------------- */
 
     dialog:open {
       opacity: 1;
@@ -96,10 +96,9 @@
       }
     }
 
+    /* ---------Dialog Style end----- */
 
-    /* ---------------------Dialog Style end--------------------------- */
-
-    /* ------------------Form in Dialog Style start---------------------- */
+    /* ------Form in Dialog Style start------ */
 
     dialog form {
       padding: 25px;
@@ -183,7 +182,7 @@
       }
     }
 
-    /* ------------------Form in Dialog Style end---------------------- */
+    /* ----Form in Dialog Style end------ */
 
 
   }

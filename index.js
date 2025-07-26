@@ -54,20 +54,19 @@ cards.addEventListener("click", (e) => {
     deleteCard(myLibrary, cardIndexDelete);
     cards.textContent = "";
     displayBooksAsCards(myLibrary);
-    
+
     // Read Card
   } else if (e.target.nodeName === "INPUT") {
     const checkbox = e.target;
     const indexCheckbox = getElementIndex(myLibrary, checkbox.id);
     if (isCardChecked(checkbox)) {
       addCardToMyBooks(myLibrary, indexCheckbox);
-
-
+      myLibrary[indexCheckbox].checkedCard = true;
+     
     } else {
+      myLibrary[indexCheckbox].checkedCard = false;
       const indexUnCheckbox = getElementIndex(myBooks, checkbox.id);
       let x = deleteCard(myBooks, indexUnCheckbox);
-
-
       favoriteCards.textContent = "";
     }
 
@@ -77,7 +76,7 @@ cards.addEventListener("click", (e) => {
 })
 
 //------------My Tools---------
-function Book(author, title, numOfPages, id, smallImgURL, bigImgURL) {
+function Book(author, title, numOfPages, id, smallImgURL, bigImgURL, checkedCard) {
   this.author = author;
   this.title = title;
   this.numOfPages = numOfPages;
@@ -85,6 +84,7 @@ function Book(author, title, numOfPages, id, smallImgURL, bigImgURL) {
   this.id = id;
   this.smallImgURL = smallImgURL;
   this.bigImgURL = bigImgURL;
+  this.checkedCard = this.checkedCard;
 }
 
 function addBookToLibrary(author, title, numOfPages, smallImgURL, bigImgURL) {
@@ -153,6 +153,7 @@ function displayBooksAsCards(arrOfBooks) {
     inp.name = "is-read";
     inp.classList.add("read");
     inp.id = item.id;
+    inp.checked =  item.checkedCard;
 
     cardRead.prepend(label, inp);
     card.dataset.bookId = item.id;
@@ -182,7 +183,6 @@ function isCardChecked(checkbox) {
 
 function addCardToMyBooks(array, index) {
   myBooks.push(array[index]);
-
 }
 
 function displayMyFavoriteCards() {
