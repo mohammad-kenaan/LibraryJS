@@ -4,6 +4,10 @@
 
 A simple practice project designed to help you understand and apply JavaScript Objects and Object Constructors. The app allows users to view a list of books and add new books through a form.
 
+A responsive web application that allows users to manage a personal book collection. Users can add new books, view them as interactive cards, mark books as "Read" using checkboxes, and manage a list of favorite books.
+
+
+
 ## Core Features:
 - Store book data using objects with properties like title, author, pages, and isRead.
 - Dynamically display books on the page.
