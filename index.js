@@ -10,45 +10,12 @@ const form = document.getElementById('add-new-book-Form');
 let myLibrary = [];
 let myBooks = [];
 
-console.log(cards);
 
-console.log(favoriteCards);
-function Book(author, title, numOfPages, id, smallImgURL, bigImgURL) {
-  this.author = author;
-  this.title = title;
-  this.numOfPages = numOfPages;
-  // this.read = read;
-  this.id = id;
-  this.smallImgURL = smallImgURL;
-  this.bigImgURL = bigImgURL;
-}
-
-function addBookToLibrary(author, title, numOfPages, smallImgURL, bigImgURL) {
-  let id = window.crypto.randomUUID();
-  let newBook = new Book(author, title, numOfPages, id, smallImgURL, bigImgURL);
-  myLibrary.push(newBook);
-}
-
-addBookToLibrary("Mohamad Kenaan", "JS-Odin", 245, "./assets/images/pic1-342.jpg", "./assets/images/pic1-1000.jpg");
-addBookToLibrary("Eyad Al-Khalidi", "Css-Odin", 140, "./assets/images/pic2-342.jpg", "./assets/images/pic2-1000.jpg");
-addBookToLibrary("Khaled Kenaan", "Mobile Application", 80, "./assets/images/pic3-342.jpg", "./assets/images/pic3-1000.jpg");
-addBookToLibrary("Omar Kenaan", "Information Technology", 180, "./assets/images/pic4-342.jpg", "./assets/images/pic4-1000.jpg");
-addBookToLibrary("Mohamad Kenaan", "Web Development", 730, "./assets/images/pic5-342.jpg", "./assets/images/pic5-1000.jpg");
-addBookToLibrary("Mohamad Kenaan", "Intro to Arabic", 1730, "./assets/images/pic6-342.jpg", "./assets/images/pic6-1000.jpg");
-addBookToLibrary("Eyad Al-Khalidi", "Master Of Programming", 8730, "./assets/images/pic1-342.jpg", "./assets/images/pic1-1000.jpg");
-
-
-function deleteBook(myLibrary) {
-
-}
-
-//------------Books display---------------------
-
+//------------Books display in Menu section---------
+createDefaultBooks()
 displayBooksAsCards(myLibrary)
-//--------------------------------------------------
 
-
-
+//------------Add new Book---------
 
 showDialog.addEventListener("click", () => {
   dialogElem.showModal();
@@ -72,6 +39,71 @@ formSubmit.addEventListener("click", (e) => {
   displayBooksAsCards(myLibrary)
   dialogElem.close();
 })
+
+cancelProcess.addEventListener("click", () => {
+  dialogElem.close();
+});
+
+//------------Delete and Read - Unread Book---------
+cards.addEventListener("click", (e) => {
+
+  if (e.target.nodeName === "BUTTON" && e.target.textContent === "Delete") {
+    const cardId = e.target.dataset.bookId;
+    // Delete card  
+    const cardIndexDelete = getElementIndex(myLibrary, cardId);
+    deleteCard(myLibrary, cardIndexDelete);
+    cards.textContent = "";
+    displayBooksAsCards(myLibrary);
+    
+    // Read Card
+  } else if (e.target.nodeName === "INPUT") {
+    const checkbox = e.target;
+    const indexCheckbox = getElementIndex(myLibrary, checkbox.id);
+    if (isCardChecked(checkbox)) {
+      addCardToMyBooks(myLibrary, indexCheckbox);
+
+
+    } else {
+      const indexUnCheckbox = getElementIndex(myBooks, checkbox.id);
+      let x = deleteCard(myBooks, indexUnCheckbox);
+
+
+      favoriteCards.textContent = "";
+    }
+
+    displayMyFavoriteCards();
+  }
+
+})
+
+//------------My Tools---------
+function Book(author, title, numOfPages, id, smallImgURL, bigImgURL) {
+  this.author = author;
+  this.title = title;
+  this.numOfPages = numOfPages;
+  // this.read = read;
+  this.id = id;
+  this.smallImgURL = smallImgURL;
+  this.bigImgURL = bigImgURL;
+}
+
+function addBookToLibrary(author, title, numOfPages, smallImgURL, bigImgURL) {
+  let id = window.crypto.randomUUID();
+  let newBook = new Book(author, title, numOfPages, id, smallImgURL, bigImgURL);
+  myLibrary.push(newBook);
+}
+
+function createDefaultBooks() {
+  addBookToLibrary("Mohamad Kenaan", "JS-Odin", 245, "./assets/images/pic1-342.jpg", "./assets/images/pic1-1000.jpg");
+  addBookToLibrary("Eyad Al-Khalidi", "Css-Odin", 140, "./assets/images/pic2-342.jpg", "./assets/images/pic2-1000.jpg");
+  addBookToLibrary("Khaled Kenaan", "Mobile Application", 80, "./assets/images/pic3-342.jpg", "./assets/images/pic3-1000.jpg");
+  addBookToLibrary("Omar Kenaan", "Information Technology", 180, "./assets/images/pic4-342.jpg", "./assets/images/pic4-1000.jpg");
+  addBookToLibrary("Mohamad Kenaan", "Web Development", 730, "./assets/images/pic5-342.jpg", "./assets/images/pic5-1000.jpg");
+  addBookToLibrary("Mohamad Kenaan", "Intro to Arabic", 1730, "./assets/images/pic6-342.jpg", "./assets/images/pic6-1000.jpg");
+  addBookToLibrary("Eyad Al-Khalidi", "Master Of Programming", 8730, "./assets/images/pic1-342.jpg", "./assets/images/pic1-1000.jpg");
+
+}
+
 
 function displayBooksAsCards(arrOfBooks) {
   arrOfBooks.forEach(item => {
@@ -127,35 +159,10 @@ function displayBooksAsCards(arrOfBooks) {
   });
 }
 
-cancelProcess.addEventListener("click", () => {
-  dialogElem.close();
-});
-
-
-cards.addEventListener("click", (e) => {
-
-  if (e.target.nodeName === "BUTTON" && e.target.textContent === "Delete") {
-    const cardId = e.target.dataset.bookId;
-    // Delete card  
-    const cardIndex = getElementIndex(myLibrary, cardId);
-    console.log(cardIndex);
-    deleteCard(myLibrary, cardIndex)
-    // Read Card
-  } else if (e.target.nodeName === "INPUT") {
-    const checkbox = e.target;
-    if (isCardRead(checkbox)) {
-      const cardIndex = getElementIndex(myLibrary, checkbox.id);
-      addCardToMyBooks(myLibrary, cardIndex);
-      displayMyFavoriteCards();
-    }
-  }
-
-})
-
-function getElementIndex(myLibrary, cardId) {
+function getElementIndex(array, id) {
   let cardIndex;
-  myLibrary.forEach((item, index) => {
-    if (item.id === cardId) {
+  array.forEach((item, index) => {
+    if (item.id === id) {
       cardIndex = index;
     }
   });
@@ -163,33 +170,23 @@ function getElementIndex(myLibrary, cardId) {
   return cardIndex;
 }
 
-function deleteCard(myLibrary, cardIndex) {
-  if (cardIndex === 0) {
-    myLibrary.splice(cardIndex, 1);
-    cards.textContent = "";
-    displayBooksAsCards(myLibrary)
-  } else {
-    if (cardIndex > -1) {
-      myLibrary.splice(cardIndex, cardIndex);
-      cards.textContent = "";
-      displayBooksAsCards(myLibrary)
-    }
+function deleteCard(array, index) {
+  if (index > -1) {
+    array.splice(index, 1);
   }
 }
 
-function isCardRead(checkbox) {
+function isCardChecked(checkbox) {
   return checkbox.checked;
 }
 
-function addCardToMyBooks(myLibrary, cardIndex) {
-  myBooks.push(myLibrary[cardIndex])
+function addCardToMyBooks(array, index) {
+  myBooks.push(array[index]);
 
 }
 
 function displayMyFavoriteCards() {
   favoriteCards.textContent = "";
-  console.log(myBooks);
-  console.log(myLibrary);
   myBooks.forEach(item => {
 
     const card = document.createElement("div");
