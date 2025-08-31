@@ -12,8 +12,8 @@ let myBooks = [];
 
 
 //------------Books display in Menu section---------
-createDefaultBooks()
-displayBooksAsCards(myLibrary)
+createDefaultBooks();
+displayBooksAsCards(myLibrary);
 
 //------------Add new Book---------
 
@@ -62,7 +62,7 @@ cards.addEventListener("click", (e) => {
     if (isCardChecked(checkbox)) {
       addCardToMyBooks(myLibrary, indexCheckbox);
       myLibrary[indexCheckbox].checkedCard = true;
-     
+
     } else {
       myLibrary[indexCheckbox].checkedCard = false;
       const indexUnCheckbox = getElementIndex(myBooks, checkbox.id);
@@ -70,7 +70,11 @@ cards.addEventListener("click", (e) => {
       favoriteCards.textContent = "";
     }
 
-    displayMyFavoriteCards();
+
+    favoriteCards.textContent = "";
+    myBooks.forEach(item => {
+      item.displayMyFavoriteCards(item);
+    });
   }
 
 })
@@ -87,7 +91,46 @@ function Book(author, title, numOfPages, id, smallImgURL, bigImgURL, checkedCard
   this.checkedCard = this.checkedCard;
 }
 
+Book.prototype.displayMyFavoriteCards = function (item) {
+  const card = document.createElement("div");
+  card.classList.add("card");
+  card.setAttribute("id", "myBtn");
+  favoriteCards.prepend(card);
+
+  const picture = document.createElement("picture");
+  card.append(picture);
+
+  const img = document.createElement("img");
+  img.src = item.smallImgURL;
+  picture.append(img);
+
+  const cardContent = document.createElement("div");
+  cardContent.classList.add("card-content");
+  card.append(cardContent);
+
+  const h1 = document.createElement("h1");
+  h1.textContent = item.title;
+
+  const p1 = document.createElement("p");
+  p1.textContent = "Author: " + item.author;
+
+  const p2 = document.createElement("p");
+  p2.textContent = "Number of Pages: " + item.numOfPages;
+  cardContent.append(h1, p1, p2);
+
+  card.addEventListener("mouseenter", () => {
+    console.log(item.info());
+  });
+
+}
+
+Book.prototype.info = function () {
+  return `${this.title} by ${this.author}, ${this.numOfPages} pages, Read: ${this.checkedCard}`;
+}
+
 function addBookToLibrary(author, title, numOfPages, smallImgURL, bigImgURL) {
+  // Note Window crypto doesn't work on 10.0.0:5500 
+  // its Work with localhost:5500 and any global url
   let id = window.crypto.randomUUID();
   let newBook = new Book(author, title, numOfPages, id, smallImgURL, bigImgURL);
   myLibrary.push(newBook);
@@ -103,7 +146,6 @@ function createDefaultBooks() {
   addBookToLibrary("Eyad Al-Khalidi", "Master Of Programming", 8730, "./assets/images/pic1-342.jpg", "./assets/images/pic1-1000.jpg");
 
 }
-
 
 function displayBooksAsCards(arrOfBooks) {
   arrOfBooks.forEach(item => {
@@ -153,7 +195,7 @@ function displayBooksAsCards(arrOfBooks) {
     inp.name = "is-read";
     inp.classList.add("read");
     inp.id = item.id;
-    inp.checked =  item.checkedCard;
+    inp.checked = item.checkedCard;
 
     cardRead.prepend(label, inp);
     card.dataset.bookId = item.id;
@@ -185,36 +227,4 @@ function addCardToMyBooks(array, index) {
   myBooks.push(array[index]);
 }
 
-function displayMyFavoriteCards() {
-  favoriteCards.textContent = "";
-  myBooks.forEach(item => {
-
-    const card = document.createElement("div");
-    card.classList.add("card");
-    favoriteCards.prepend(card);
-
-    const picture = document.createElement("picture");
-    card.append(picture);
-
-    const img = document.createElement("img");
-    img.src = item.smallImgURL;
-    picture.append(img);
-
-    const cardContent = document.createElement("div");
-    cardContent.classList.add("card-content");
-    card.append(cardContent);
-
-    const h1 = document.createElement("h1");
-    h1.textContent = item.title;
-
-    const p1 = document.createElement("p");
-    p1.textContent = "Author: " + item.author;
-
-    const p2 = document.createElement("p");
-    p2.textContent = "Number of Pages: " + item.numOfPages;
-    cardContent.append(h1, p1, p2);
-
-
-  });
-}
 
